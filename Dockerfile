@@ -6,8 +6,8 @@ ADD . .
 RUN go build -o /topz main.go
 
 FROM gcr.io/distroless/base
-ENV VERSION "v0.0.0"
-EXPOSE 8080
+ENV VERSION "v0.0.1"
+EXPOSE 1080
 WORKDIR /
 COPY --from=builder /topz /usr/bin/topz
 ENTRYPOINT ["/usr/bin/topz"]

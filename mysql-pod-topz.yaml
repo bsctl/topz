@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mysql
+  namespace:
+  labels:
+    run: mysql
+spec:
+  shareProcessNamespace: true
+  containers:
+  - name: main
+    image: mysql:5.6
+    env:
+    - name: MYSQL_RANDOM_ROOT_PASSWORD
+      # The generated root password will be printed to stdout
+      # kubectl logs mysql | grep GENERATED
+      value: "yes"
+    ports:
+    - containerPort: 3306
+  - name: topz
+    image: bsctl/topz:latest
+    ports:
+      - containerPort: 1080
